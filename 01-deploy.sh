@@ -5,7 +5,6 @@ if [ ! -f config/install-config.yaml.bak ]; then
     echo "1st run!"
     openshift-install create install-config
     cp install-config.yaml config/install-config.yaml.bak
-    touch config/1strun.txt
 else
     echo "Re-run!"
     cp config/install-config.yaml.bak install-config.yaml
