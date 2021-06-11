@@ -1,7 +1,7 @@
 #!/bin/bash
 #Author: fenar
 echo -e "Creating AWS OCP Cluster Manifests\n"
-if [ ! -f /1strun.txt ]; then
+if [ ! -f 1strun.txt ]; then
     echo "1st run!"
     openshift-install create install-config
     cp install-config.yaml config/install-config.yaml.bak
