@@ -1,0 +1,50 @@
+apiVersion: v1
+baseDomain: narlabs.io
+compute:
+- architecture: amd64
+  hyperthreading: Enabled
+  name: worker
+  replicas: 3
+  platform:
+    aws:
+      rootVolume:
+        iops: 2000
+        size: 180
+        type: io1
+      type: m5.xlarge
+      zones:
+      - us-east-1a
+      - us-east-1b
+      - us-east-1c
+controlPlane:
+  architecture: amd64
+  hyperthreading: Enabled
+  name: master
+  replicas: 3
+  platform:
+    aws:
+      rootVolume:
+        iops: 4000
+        size: 140
+        type: io1
+      type: m5.xlarge
+metadata:
+  name: awsexpanded
+networking:
+  clusterNetwork:
+  - cidr: 10.128.0.0/14
+    hostPrefix: 23
+  machineNetwork:
+  - cidr: 10.0.0.0/16
+  networkType: OVNKubernetes
+  ovnKubernetesConfig:
+    ipsecConfig: {}
+  serviceNetwork:
+  - 172.30.0.0/16
+platform:
+  aws:
+    region: us-east-1
+publish: External
+pullSecret: '{"auths":{"cloud.openshift.com":{"auth":"b3BlbnNoaWZ0LXJlbGVhc2UtZGV2K29jbV9hY2Nlc3NfNzI4ZGQzNWE1Mzc4NDBhZjhkZTE1NGNjMDUxNWMzYzc6SE1MQ1M5WDdNUUo0QVNZUjY1TUsySlVLSFgyNlJYM0ZSTjNGN0E4QTZKWlQ1NDhNUFlXSkxQUTBXVzRHMUpBSA==","email":"fnar@redhat.com"},"quay.io":{"auth":"b3BlbnNoaWZ0LXJlbGVhc2UtZGV2K29jbV9hY2Nlc3NfNzI4ZGQzNWE1Mzc4NDBhZjhkZTE1NGNjMDUxNWMzYzc6SE1MQ1M5WDdNUUo0QVNZUjY1TUsySlVLSFgyNlJYM0ZSTjNGN0E4QTZKWlQ1NDhNUFlXSkxQUTBXVzRHMUpBSA==","email":"fnar@redhat.com"},"registry.connect.redhat.com":{"auth":"fHVoYy0xZ0lwNjNvck5VZTJsWE55b3A2N3BZSGlXOTM6ZXlKaGJHY2lPaUpTVXpVeE1pSjkuZXlKemRXSWlPaUkzTkRoa1lUaGlZVEJsWm1RME1EbGlZV1l6TWpaaU4yRXpaRFUxTjJZMk9TSjkuTXl1cUdjc3VZaVN3NU5yd1luYlRPcXB3Y21udGMxcWgzLXBXT2hMbDhBUlpPZ3hfUHIwVlV0enJlci1TZkgwdkI2N2dSMkxSc3hvbWZZOGxKVTFsM2NXRTNvSVV4RnNENThUam9pckRnckpfM3Z6UjdudHpYMnhiZGhOcEc5ZmNfajZraGdsZWpTU0N3UW0zQkZINzZob1Z2TEwydUtyT3hUYXFVckt6TnJGa3FJcU9MbmViVmg5c1RiZmktOTdXVjBZVkVSNDJrMFBvdC1pM2IxOUlmX2MyYl9vSFE2VXBJdWtWc0R1ZjBYQlJidG4xWTdCcy1zSlZwY01jRk9vZFQydnRsYTZfdUdpbC02V2l3M0V0cFBvWThMdDMyOWJQU2RTd1ZnZEtDbUkzWWZua3htYVlHZ2dTSkFMUjZ1ZGRBaHZTV2YxZ0FPenRVMklYekhMRkVyVFpJNlJHRTc4aE5sektGUjdPNjYySUF4SG1OZnRRT3lsdGJjaHgxNzFXbmM4VWthMGpITUdnTFQ0SG44ZFpuYWI0S0RnNmxHNWgwRXI5M2EzRVBwWG9vOS0waG8xR3ExeExEUXYtNlRWZ3ZWWVVzTkRsX09sR1hja3lFSWl6Zm54RzlQUDJHcE8xbjU0TWVIc1czT0x6dVdtZ0lEV0c3NGwzZXlLOW9XQi04dzFXekZTYzhiS3NaQjhyRDlZbnVibEVWTTJXQmp1bHNqaEFlX3ZnMUVRa1BkTkxwNjRMX3BGc0pta2VROVZJd0NzdlUzZVEzbzd4Q2VaZjBXRUxybzRyWjN6UUxVenRlWlpXVmR3QlNXT3FQNkczRWtkRXFHOXpSYm9iU2V2enkwZzBoWVdnaS11QWFkdUxXWDFGWWljOW05ZVZsZXdLeXlUUU1MU082YTA=","email":"fnar@redhat.com"},"registry.redhat.io":{"auth":"fHVoYy0xZ0lwNjNvck5VZTJsWE55b3A2N3BZSGlXOTM6ZXlKaGJHY2lPaUpTVXpVeE1pSjkuZXlKemRXSWlPaUkzTkRoa1lUaGlZVEJsWm1RME1EbGlZV1l6TWpaaU4yRXpaRFUxTjJZMk9TSjkuTXl1cUdjc3VZaVN3NU5yd1luYlRPcXB3Y21udGMxcWgzLXBXT2hMbDhBUlpPZ3hfUHIwVlV0enJlci1TZkgwdkI2N2dSMkxSc3hvbWZZOGxKVTFsM2NXRTNvSVV4RnNENThUam9pckRnckpfM3Z6UjdudHpYMnhiZGhOcEc5ZmNfajZraGdsZWpTU0N3UW0zQkZINzZob1Z2TEwydUtyT3hUYXFVckt6TnJGa3FJcU9MbmViVmg5c1RiZmktOTdXVjBZVkVSNDJrMFBvdC1pM2IxOUlmX2MyYl9vSFE2VXBJdWtWc0R1ZjBYQlJidG4xWTdCcy1zSlZwY01jRk9vZFQydnRsYTZfdUdpbC02V2l3M0V0cFBvWThMdDMyOWJQU2RTd1ZnZEtDbUkzWWZua3htYVlHZ2dTSkFMUjZ1ZGRBaHZTV2YxZ0FPenRVMklYekhMRkVyVFpJNlJHRTc4aE5sektGUjdPNjYySUF4SG1OZnRRT3lsdGJjaHgxNzFXbmM4VWthMGpITUdnTFQ0SG44ZFpuYWI0S0RnNmxHNWgwRXI5M2EzRVBwWG9vOS0waG8xR3ExeExEUXYtNlRWZ3ZWWVVzTkRsX09sR1hja3lFSWl6Zm54RzlQUDJHcE8xbjU0TWVIc1czT0x6dVdtZ0lEV0c3NGwzZXlLOW9XQi04dzFXekZTYzhiS3NaQjhyRDlZbnVibEVWTTJXQmp1bHNqaEFlX3ZnMUVRa1BkTkxwNjRMX3BGc0pta2VROVZJd0NzdlUzZVEzbzd4Q2VaZjBXRUxybzRyWjN6UUxVenRlWlpXVmR3QlNXT3FQNkczRWtkRXFHOXpSYm9iU2V2enkwZzBoWVdnaS11QWFkdUxXWDFGWWljOW05ZVZsZXdLeXlUUU1MU082YTA=","email":"fnar@redhat.com"}}}'
+sshKey: |
+  ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQC8tC09JnrP/+wqkNneLPezAJBQ+N13Crkl5An9funLDXQT5l7/7gLbA/83bzk/OUBnncs/I+FSuXtai9LHC5wXwqYvVudCVzQ8VSqPUC1Fi3Couxyod1kZHOsbppUZqhGo5vmecA7VkHHPmrK1coROeAbBid5J4nekhsbz+G8TCvw7lRVUXXHvtJHh+JIiE2DgdHwPg6tKVETiVCv9xlLOqII6YcJmf+Iqxz+1Hrz5XjH0zzYp7t6pD82lsJjnAcLyDbVd6aQQo26mjRd9nUm4x8CnzYcl8t4bLa9S0it0zw4lf3lFt7M6QSFHqiK+Xie3rZpWymAIH4SJRQPgZPzrD5LN4lWe/B8iwU9NsB3j8sGpEyzboukXPQn1JRjQjePfiCisdnzK7tpFObazOznmORPYFfH7ayS1zpAuFpih0KpvxnGUBaIHO9ouUu26vSPev4OhlKG6QZgyWI6hQNCsFVG+smIp9ToBriW6aPEQgewN3DedXBW6ldmMQ0B2lbc= fenar@localhost.localdomain
