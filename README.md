@@ -1,9 +1,9 @@
 # ocp-aws-ovnipsec
 OCP cluster creation on AWS with OVN Ipsec <br>
 
-If you haven't setup openshift commandline tools yet, please do so:
+If you haven't setup openshift commandline tools yet, please do with sudo :
 ```
-./00-prereq.sh
+sudo ./00-prereq.sh
 ```
 
 Cluster create:
