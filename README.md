@@ -13,7 +13,7 @@ Cluster create:
 
 Cluster destroy:
 ```
-03-clean.sh
+./03-clean.sh
 ```
 
 
