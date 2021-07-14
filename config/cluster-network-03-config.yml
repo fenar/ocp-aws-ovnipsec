@@ -15,4 +15,6 @@ spec:
   defaultNetwork:
     type: OVNKubernetes
     ovnKubernetesConfig:
+      mtu: 1400
+      genevePort: 6081
       ipsecConfig: {}
