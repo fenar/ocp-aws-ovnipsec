@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: gs-testbed
+  labels:
+    env: prod
+---
+apiVersion: k8s.ovn.org/v1
+kind: EgressIP
+metadata:
+  name: gs-testbed
+spec:
+  egressIPs:
+  - 172.27.200.5
+  - 172.27.200.6
+  namespaceSelector:
+    matchLabels:
+      env: prod
